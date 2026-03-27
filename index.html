@@ -1,1 +1,841 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banana Digital – Premium Digital Consulting</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(0,0,0,.05);
+      background: rgba(255,255,255,.90);
+      backdrop-filter: blur(20px);
+    }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: #0f2747;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      box-shadow: 0 2px 8px rgba(15,39,71,.18);
+    }
+    .logo-sub { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .28em; color: #45658b; }
+    .logo-name { font-size: 18px; font-weight: 600; letter-spacing: -.02em; color: #0f2747; }
+    nav { display: flex; align-items: center; gap: 32px; }
+    nav a { font-size: 14px; font-weight: 500; color: #1f2937; text-decoration: none; transition: color .2s; }
+    nav a:hover { color: #0f2747; }
+    .btn-primary {
+      background: #0f2747;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(15,39,71,.18);
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: #14345f; transform: translateY(-2px); }
+
+    /* ── Hero ── */
+    .hero {
+      background: #eef3f9;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(58,134,255,.10), transparent 28%),
+        radial-gradient(circle at 80% 20%, rgba(15,39,71,.10), transparent 24%);
+    }
+    .hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 56px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(15,39,71,.10);
+      background: rgba(255,255,255,.80);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      color: #45658b;
+      box-shadow: 0 2px 8px rgba(15,39,71,.06);
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: clamp(40px, 5.5vw, 72px);
+      font-weight: 600;
+      line-height: .98;
+      letter-spacing: -.03em;
+      color: #0f172a;
+      max-width: 640px;
+    }
+    h1 span { color: #0f2747; }
+    .hero-p {
+      margin-top: 28px;
+      max-width: 560px;
+      font-size: 19px;
+      line-height: 1.7;
+      color: #475569;
+    }
+    .hero-btns {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-outline {
+      background: #fff;
+      color: #0f2747;
+      border: 1px solid rgba(15,39,71,.15);
+      border-radius: 999px;
+      padding: 16px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline:hover { border-color: rgba(15,39,71,.30); background: #f8fbff; }
+    .btn-primary-lg {
+      background: #0f2747;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 16px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 16px 40px rgba(15,39,71,.20);
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary-lg:hover { background: #14345f; transform: translateY(-2px); }
+
+    .hero-stats {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .stat-card {
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.60);
+      background: rgba(255,255,255,.75);
+      padding: 20px;
+      box-shadow: 0 18px 40px rgba(15,39,71,.08);
+      backdrop-filter: blur(10px);
+    }
+    .stat-value { font-size: 24px; font-weight: 600; letter-spacing: -.02em; color: #0f2747; }
+    .stat-label { margin-top: 8px; font-size: 13px; line-height: 1.5; color: #526072; }
+
+    /* Dashboard card */
+    .hero-right { display: flex; align-items: center; justify-content: center; }
+    .dashboard-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+    }
+    .blob1 {
+      position: absolute; top: 32px; left: -32px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(58,134,255,.10);
+      filter: blur(48px);
+    }
+    .blob2 {
+      position: absolute; bottom: 16px; right: -32px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(15,39,71,.10);
+      filter: blur(48px);
+    }
+    .dashboard-outer {
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,.70);
+      background: rgba(255,255,255,.85);
+      padding: 20px;
+      box-shadow: 0 30px 80px rgba(15,39,71,.15);
+      backdrop-filter: blur(20px);
+    }
+    .dashboard-dark {
+      border-radius: 28px;
+      background: #0f2747;
+      padding: 24px;
+      color: #fff;
+    }
+    .dash-header { display: flex; align-items: flex-start; justify-content: space-between; }
+    .dash-eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: .24em; color: rgba(255,255,255,.60); }
+    .dash-title { margin-top: 8px; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
+    .dash-live {
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,.80);
+    }
+    .dash-kpis {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .kpi-box {
+      border-radius: 16px;
+      background: rgba(255,255,255,.08);
+      padding: 16px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+    }
+    .kpi-value { font-size: 22px; font-weight: 600; }
+    .kpi-label { margin-top: 4px; font-size: 13px; color: rgba(255,255,255,.70); }
+    .chart-wrap {
+      margin-top: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+      padding: 20px;
+    }
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+      height: 130px;
+    }
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+    .bar {
+      width: 100%;
+      background: rgba(255,255,255,.90);
+      border-radius: 8px 8px 0 0;
+    }
+    .bar-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: rgba(255,255,255,.55);
+    }
+    .dash-bottom {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .dash-card {
+      border-radius: 24px;
+      border: 1px solid rgba(15,39,71,.08);
+      padding: 20px;
+    }
+    .dash-card-light { background: #f8fbff; }
+    .dash-card-white { background: #fff; }
+    .card-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      color: #45658b;
+    }
+    .roadmap-items { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .roadmap-item { display: flex; align-items: center; gap: 12px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #0f2747; flex-shrink: 0; }
+    .roadmap-item span { font-size: 13px; color: #334155; }
+    .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: #eef3f9;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0f2747;
+    }
+
+    /* ── Why Us ── */
+    #why-us {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .why-inner {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .26em;
+      color: #45658b;
+    }
+    .section-h2 {
+      margin-top: 16px;
+      font-size: clamp(30px, 3.5vw, 48px);
+      font-weight: 600;
+      letter-spacing: -.03em;
+      color: #0f172a;
+      line-height: 1.1;
+    }
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .diff-card {
+      border-radius: 28px;
+      border: 1px solid rgba(0,0,0,.05);
+      background: #fff;
+      padding: 28px;
+      box-shadow: 0 22px 50px rgba(15,39,71,.06);
+    }
+    .diff-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: #45658b;
+    }
+    .diff-title {
+      margin-top: 16px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      color: #0f2747;
+      line-height: 1.2;
+    }
+    .diff-text {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #526072;
+    }
+
+    /* ── Services ── */
+    #services { background: #fff; }
+    .services-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .services-header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .services-header-right {
+      max-width: 560px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #526072;
+    }
+    .services-grid {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      border-radius: 30px;
+      border: 1px solid rgba(0,0,0,.05);
+      background: #f8fbff;
+      padding: 28px;
+      transition: transform .3s, background .3s, box-shadow .3s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      background: #fff;
+      box-shadow: 0 24px 60px rgba(15,39,71,.10);
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      background: #fff;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #0f2747;
+      box-shadow: 0 2px 6px rgba(15,39,71,.08), inset 0 0 0 1px rgba(15,39,71,.08);
+    }
+    .service-title {
+      margin-top: 24px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -.02em;
+      color: #0f172a;
+    }
+    .service-text {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #526072;
+    }
+    .service-link {
+      margin-top: 32px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #0f2747;
+      opacity: .8;
+      transition: opacity .2s;
+    }
+    .service-card:hover .service-link { opacity: 1; }
+
+    /* ── Impact ── */
+    #impact {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 32px;
+    }
+    .impact-dark {
+      border-radius: 34px;
+      background: #0f2747;
+      padding: 40px;
+      color: #fff;
+      box-shadow: 0 30px 70px rgba(15,39,71,.16);
+    }
+    .impact-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      color: rgba(255,255,255,.55);
+    }
+    .impact-h2 {
+      margin-top: 16px;
+      font-size: clamp(28px, 3.2vw, 44px);
+      font-weight: 600;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+    }
+    .impact-p {
+      margin-top: 24px;
+      max-width: 480px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.72);
+    }
+    .impact-white {
+      border-radius: 34px;
+      border: 1px solid rgba(0,0,0,.05);
+      background: #fff;
+      padding: 40px;
+      box-shadow: 0 24px 60px rgba(15,39,71,.06);
+    }
+    .outcomes-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      color: #45658b;
+    }
+    .outcomes-list { margin-top: 24px; display: flex; flex-direction: column; gap: 20px; }
+    .outcome-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: #f8fbff;
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .outcome-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #0f2747;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .outcome-text { font-size: 15px; line-height: 1.7; color: #334155; }
+
+    /* ── CTA ── */
+    .cta-section { background: #fff; }
+    .cta-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+    }
+    .cta-box {
+      border-radius: 36px;
+      border: 1px solid rgba(0,0,0,.05);
+      background: linear-gradient(135deg, #0f2747 0%, #163d6d 100%);
+      padding: 56px 48px;
+      color: #fff;
+      box-shadow: 0 30px 80px rgba(15,39,71,.18);
+    }
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 32px;
+    }
+    .cta-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      color: rgba(255,255,255,.55);
+    }
+    .cta-h2 {
+      margin-top: 16px;
+      font-size: clamp(28px, 3.2vw, 44px);
+      font-weight: 600;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+    }
+    .cta-p {
+      margin-top: 20px;
+      max-width: 480px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.72);
+    }
+    .cta-btns { display: flex; flex-direction: column; gap: 16px; }
+    .btn-white {
+      background: #fff;
+      color: #0f2747;
+      border: none;
+      border-radius: 999px;
+      padding: 16px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      white-space: nowrap;
+    }
+    .btn-white:hover { background: #f4f8fc; transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: 999px;
+      padding: 16px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.10); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid rgba(0,0,0,.05);
+      background: #f5f7fb;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: start;
+    }
+    .footer-name { font-size: 18px; font-weight: 600; letter-spacing: -.02em; color: #0f2747; }
+    .footer-p { margin-top: 12px; max-width: 440px; font-size: 13px; line-height: 1.6; color: #526072; }
+    .footer-contact { display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #526072; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-inner,
+      .why-inner,
+      .impact-grid,
+      .cta-grid,
+      .footer-inner { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      nav { display: none; }
+    }
+    @media (max-width: 640px) {
+      .header-inner { padding: 16px 20px; }
+      .hero-inner { padding: 48px 20px; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .cta-box { padding: 36px 24px; }
+      #why-us, #services .services-inner, #impact, .cta-inner, .footer-inner {
+        padding-left: 20px; padding-right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo-icon">BD</div>
+      <div>
+        <div class="logo-sub">Digital Consulting</div>
+        <div class="logo-name">Banana Digital</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#services">Teenused</a>
+      <a href="#why-us">Miks meie</a>
+      <a href="#impact">Mõju</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+    <button class="btn-primary">Broneeri konsultatsioon</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Premium digital transformation partner</div>
+      <h1>Viime ettevõtte <span>digitaalse muutuse</span> strateegiast tulemuseni.</h1>
+      <p class="hero-p">Aitame juhtidel lihtsustada protsesse, ühendada süsteeme, tugevdada andmepõhist juhtimist ja luua tehnoloogilise vundamendi, mis toetab kasvu.</p>
+      <div class="hero-btns">
+        <button class="btn-primary-lg">Alusta strateegilise auditiga</button>
+        <button class="btn-outline">Vaata teenuseid</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-value">25%+</div>
+          <div class="stat-label">kiirem nähtavus protsessides</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">End-to-end</div>
+          <div class="stat-label">strateegia, arhitektuur, juurutus</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">B2B</div>
+          <div class="stat-label">fookus tootmisel, teenustel ja kasvul</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="dashboard-wrap">
+        <div class="blob1"></div>
+        <div class="blob2"></div>
+        <div class="dashboard-outer">
+          <div class="dashboard-dark">
+            <div class="dash-header">
+              <div>
+                <div class="dash-eyebrow">Transformation dashboard</div>
+                <div class="dash-title">Executive overview</div>
+              </div>
+              <div class="dash-live">Live</div>
+            </div>
+            <div class="dash-kpis">
+              <div class="kpi-box"><div class="kpi-value">12</div><div class="kpi-label">aktiivset töövoogu</div></div>
+              <div class="kpi-box"><div class="kpi-value">94%</div><div class="kpi-label">protsesside katvus</div></div>
+              <div class="kpi-box"><div class="kpi-value">8</div><div class="kpi-label">süsteemi integratsiooni</div></div>
+              <div class="kpi-box"><div class="kpi-value">3.4x</div><div class="kpi-label">parem nähtavus KPI-des</div></div>
+            </div>
+            <div class="chart-wrap">
+              <div class="bars" id="bars"></div>
+            </div>
+          </div>
+          <div class="dash-bottom">
+            <div class="dash-card dash-card-light">
+              <div class="card-eyebrow">Roadmap</div>
+              <div class="roadmap-items">
+                <div class="roadmap-item"><div class="dot"></div><span>Assessment &amp; maturity review</span></div>
+                <div class="roadmap-item"><div class="dot"></div><span>Target architecture &amp; priorities</span></div>
+                <div class="roadmap-item"><div class="dot"></div><span>Implementation &amp; adoption</span></div>
+              </div>
+            </div>
+            <div class="dash-card dash-card-white">
+              <div class="card-eyebrow">Impact focus</div>
+              <div class="tags">
+                <span class="tag">ERP</span>
+                <span class="tag">BI</span>
+                <span class="tag">AI</span>
+                <span class="tag">Automation</span>
+                <span class="tag">Security</span>
+                <span class="tag">Change</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Us -->
+<section id="why-us">
+  <div class="why-inner">
+    <div>
+      <div class="section-eyebrow">Why leading teams choose us</div>
+      <h2 class="section-h2">Konsultatsioon, mis on korraga strateegiline, praktiline ja juhtidele arusaadav.</h2>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-eyebrow">Strategic clarity</div>
+        <div class="diff-title">Ärieesmärgid enne tehnoloogiat.</div>
+        <p class="diff-text">Me ei müü tööriistu. Me seome tehnoloogia konkreetsete ärieesmärkide, mõõdikute ja muutuste juhtimisega.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-eyebrow">Execution depth</div>
+        <div class="diff-title">Strateegiast juurutuseni.</div>
+        <p class="diff-text">Alates hinnangust ja roadmap'ist kuni arhitektuuri, integratsioonide, andmemudeli ja kasutuselevõtuni.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-eyebrow">Measurable impact</div>
+        <div class="diff-title">Tulemused, mida saab mõõta.</div>
+        <p class="diff-text">Fookuses on läbilaskevõime, kuluefektiivsus, nähtavus, turvalisus ja juhtimise kvaliteet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <div>
+        <div class="section-eyebrow">Capabilities</div>
+        <h2 class="section-h2">Teenused, mis loovad püsivat äriväärtust.</h2>
+      </div>
+      <p class="services-header-right">Töö ühendab strateegilise analüüsi, tehnilise arhitektuuri ja kasutuselevõtu, et muutus ei jääks slaididele, vaid jõuaks päriselt tööprotsessidesse.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">DT</div>
+        <div class="service-title">Digital Transformation</div>
+        <p class="service-text">Aitame viia strateegia, protsessid ja tehnoloogia ühtseks kasvumootoriks.</p>
+        <div class="service-link">Vaata lähenemist →</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">DA</div>
+        <div class="service-title">Data &amp; AI</div>
+        <p class="service-text">Muudame andmed juhtimisotsusteks, automatiseerimiseks ja mõõdetavaks äriväärtuseks.</p>
+        <div class="service-link">Vaata lähenemist →</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">EI</div>
+        <div class="service-title">ERP &amp; Integrations</div>
+        <p class="service-text">Loome terviklikud töövood ERP, BI, tootmise ja kliendiprotsesside vahel.</p>
+        <div class="service-link">Vaata lähenemist →</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">Cy</div>
+        <div class="service-title">Cybersecurity</div>
+        <p class="service-text">Tõstame turvalisust, vastavust ja töökindlust kogu digitaalses taristus.</p>
+        <div class="service-link">Vaata lähenemist →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Impact -->
+<section id="impact">
+  <div class="impact-grid">
+    <div class="impact-dark">
+      <div class="impact-eyebrow">Impact</div>
+      <h2 class="impact-h2">Tehnoloogia väärtus peab olema nähtav juhtimises.</h2>
+      <p class="impact-p">Seome lahendused konkreetsete tulemustega: parem läbipaistvus, kiirem aruandlus, kõrgem tootlikkus, väiksem risk ja tugevam võimekus skaleerida.</p>
+    </div>
+    <div class="impact-white">
+      <div class="outcomes-eyebrow">What clients gain</div>
+      <div class="outcomes-list">
+        <div class="outcome-item"><div class="outcome-dot"></div><div class="outcome-text">Selgem juhtimine ja läbipaistvad protsessid</div></div>
+        <div class="outcome-item"><div class="outcome-dot"></div><div class="outcome-text">Kiirem otsustamine tänu kvaliteetsematele andmetele</div></div>
+        <div class="outcome-item"><div class="outcome-dot"></div><div class="outcome-text">Madalam käsitöö ja suurem automatiseeritus</div></div>
+        <div class="outcome-item"><div class="outcome-dot"></div><div class="outcome-text">Skaleeritav IT-vundament tulevaseks kasvuks</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-box">
+      <div class="cta-grid">
+        <div>
+          <div class="cta-eyebrow">Next step</div>
+          <h2 class="cta-h2">Alustame selge hinnangu ja realistliku tegevusplaaniga.</h2>
+          <p class="cta-p">Kaardistame tänase olukorra, defineerime prioriteedid ja loome teekaardi, mida juhtkond saab kasutada otsustamiseks ja elluviimiseks.</p>
+        </div>
+        <div class="cta-btns">
+          <button class="btn-white">Broneeri konsultatsioon</button>
+          <button class="btn-ghost">Küsi pakkumist</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-name">Banana Digital</div>
+      <p class="footer-p">Premium IT-konsultatsioon ettevõtetele, kes soovivad teha digitaalsest muutusest juhtimisvõimekuse, mitte lihtsalt tehnoloogiaprojekti.</p>
+    </div>
+    <div class="footer-contact">
+      <div>hello@bananadigital.ee</div>
+      <div>+372 0000 0000</div>
+      <div>Tallinn, Estonia</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Build bar chart
+  const heights = [42, 56, 48, 71, 77, 82, 93];
+  const barsEl = document.getElementById('bars');
+  heights.forEach((h, i) => {
+    const col = document.createElement('div');
+    col.className = 'bar-col';
+    col.innerHTML = `
+      <div class="bar" style="height:${h * 1.4}px"></div>
+      <div class="bar-label">Q${i + 1}</div>
+    `;
+    barsEl.appendChild(col);
+  });
+</script>
+</body>
+</html>
